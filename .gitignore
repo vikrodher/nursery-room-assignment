@@ -1,0 +1,10 @@
+.DS_Store
+.env
+**/.env
+**/vendor/
+**/node_modules/
+**/database/*.sqlite
+**/dist/
+/backend/.env
+/backend/vendor/
+/backend/node_modules/

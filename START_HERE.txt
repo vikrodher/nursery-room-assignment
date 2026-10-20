@@ -1,0 +1,49 @@
+Nursery Room Assignment — Laravel + SQLite
+
+WINDOWS / VS CODE SETUP (no Apache or MySQL required)
+
+1. Extract this ZIP to a normal folder, for example:
+   C:\Users\YOUR_NAME\Downloads\nursery-room-assignment-laravel-sqlite
+
+2. Open the extracted folder in VS Code. Open Terminal > New Terminal.
+
+3. Go into backend and make PHP available in this terminal:
+   cd backend
+   $env:Path = "C:\xampps\php;$env:Path"
+
+   If your XAMPP folder is different, replace C:\xampps\php with the folder that contains php.exe.
+
+4. Install PHP dependencies:
+   composer install
+
+5. Create your local environment file:
+   Copy-Item .env.example .env
+
+   If .env already exists, do NOT overwrite it.
+
+6. Ensure the SQLite database file exists inside backend\database:
+   if (!(Test-Path .\database\database.sqlite)) { New-Item -ItemType File .\database\database.sqlite | Out-Null }
+
+7. Generate the Laravel app key and create database tables:
+   php artisan key:generate
+   php artisan optimize:clear
+   php artisan migrate
+
+   WARNING: On an existing project/database, do not run migrate:fresh; it deletes existing data.
+
+8. Start the app:
+   php artisan serve
+
+9. Open http://127.0.0.1:8000 in your browser. Register a workspace/manager, sign in, then add a nursery.
+
+NURSERY ADDING NOTES
+- Nursery name is required. Address is optional.
+- Nursery names must be unique inside the same workspace.
+- If save fails, check the terminal running `php artisan serve` and the validation message on the page.
+- The project uses SQLite and Laravel's PHP development server. Apache and MySQL are not needed.
+
+IMPORTANT
+- This ZIP includes the Laravel application source, migrations, tests, and the nursery-save/routing fix.
+- The vendor/ folder is not bundled; `composer install` creates it on your computer.
+- The database.sqlite included in the project may be empty. Use `php artisan migrate` to create tables.
+- Do not share your .env file or app key publicly.
